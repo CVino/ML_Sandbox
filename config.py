@@ -1,7 +1,10 @@
 Generate_Model = False
-NumberOfNeurons = 155
+NumberOfNeurons = 185
 Training_Epochs = 15
 Checkpoint_Path ="Model_Training/checkpoint.ckpt"
 Show_Input_Images = False
 Evaluate_Model = True
 Model_Name = 'NN_Model.keras'
+Execute_Predictions = True
+Number_Shown_Predictions = 10
+Prediction_Index_Start = 400
