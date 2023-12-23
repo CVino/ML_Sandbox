@@ -82,7 +82,7 @@ if config.Generate_Model == True:
   NN_Model = tf.keras.Sequential([
     vectorize_layer,
     tf.keras.layers.Embedding(10000, Embedded_Dimension),
-    tf.keras.layers.Dropout(0,2),
+    tf.keras.layers.Dropout(0.2),
     tf.keras.layers.GlobalAveragePooling1D(),
     tf.keras.layers.Dropout(0.2),
     tf.keras.layers.Dense(1)])
@@ -97,8 +97,18 @@ if config.Generate_Model == True:
               validation_data = raw_val_dataset,
               epochs = 10,
               callbacks = [cp_callback])
+  
+  Final_Model = tf.keras.Sequential([
+    NN_Model,
+    tf.keras.layers.Activation('sigmoid')
+  ])
 
-  NN_Model.save("Text_Classification/"+config.Model_Name)
+  Final_Model.compile(
+    loss=tf.keras.losses.BinaryCrossentropy(from_logits=False),
+    optimizer="adam",
+    metrics=['accuracy'])
+
+  Final_Model.save("Text_Classification/"+config.Model_Name)
 
   #Plot accuracy and loss
   history_dict = history.history
@@ -133,13 +143,13 @@ if config.Generate_Model == True:
 
 else:
     #Load Model
-    NN_Model = tf.keras.models.load_model("Text_Classification/"+config.Model_Name)
+    Final_Model = tf.keras.models.load_model("Text_Classification/"+config.Model_Name)
 
 if config.Evaluate_Model == True:
-  model_loss, model_acc = NN_Model.evaluate(raw_test_dataset)
+  model_loss, model_acc = Final_Model.evaluate(raw_test_dataset)
 
 if config.Test_Model == True:
-  Test_Result = NN_Model.predict(config.Test_Text)
+  Test_Result = Final_Model.predict(config.Test_Text)
   print("The Rate of your evaluation is: {:.2f}".format(Test_Result[0][0]))
 
   if Test_Result[0][0] < 0.4:

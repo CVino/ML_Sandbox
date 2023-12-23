@@ -4,4 +4,4 @@ Preview_Reviews = False
 Generate_Model = False
 Evaluate_Model = False
 Test_Model = True
-Test_Text = ["The movie was long and boring."]
+Test_Text = ["This is my favourite movie ever. Best movie of all times!"]
