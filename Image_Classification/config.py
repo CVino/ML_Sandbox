@@ -1,4 +1,4 @@
-Generate_Model = True
+Generate_Model = False
 NumberOfNeurons = 185
 Training_Epochs = 15
 Checkpoint_Path ="Image_Classification/Model_Training/checkpoint.ckpt"

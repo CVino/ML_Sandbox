@@ -80,7 +80,7 @@ if config.Generate_Model == True:
 
 else:
     #Load Model
-    NN_Model = tf.keras.models.load_model(config.Model_Name)
+    NN_Model = tf.keras.models.load_model("Image_Classification/"+config.Model_Name)
 
 #Evaluate Model
 if config.Evaluate_Model == True:
